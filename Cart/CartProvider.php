@@ -31,7 +31,7 @@ class CartProvider
                 if ($this->getUser()) {
                     $this->cart->setUser($this->getUser());
                     $cartManager->update($this->cart);
-                } else{
+                } else {
                     $cartManager->update($this->cart);
                     $this->container->get('event_dispatcher')->addListener(KernelEvents::RESPONSE, [$this->container->get('msi_store.cookie_listener'), 'onKernelResponse']);
                 }

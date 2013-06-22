@@ -18,9 +18,27 @@ class CartItem
     protected $id;
 
     /**
+     * @ORM\ManyToOne(targetEntity="Product")
+     * @ORM\JoinColumn(onDelete="SET NULL")
+     */
+    protected $product;
+
+    /**
      * @ORM\ManyToOne(targetEntity="cart", inversedBy="items")
      */
     protected $cart;
+
+    public function getProduct()
+    {
+        return $this->product;
+    }
+
+    public function setProduct($product)
+    {
+        $this->product = $product;
+
+        return $this;
+    }
 
     public function getCart()
     {
