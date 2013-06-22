@@ -1,0 +1,55 @@
+parameters:
+#    msi_store.example.class: Msi\StoreBundle\Example
+
+services:
+    # Cart
+    msi_store_cart_admin:
+        class: Msi\StoreBundle\Admin\CartAdmin
+        arguments: [ @msi_store.cart_manager ]
+        parent: msi_cmf.admin
+        tags:
+            - { name: msi.admin }
+
+    msi_store.cart_manager:
+        class: Msi\StoreBundle\Doctrine\CartManager
+        arguments: [ Msi\StoreBundle\Entity\Cart ]
+        parent: msi_cmf.manager
+
+    # CartItem
+    msi_store_cart_item_admin:
+        class: Msi\StoreBundle\Admin\CartItemAdmin
+        arguments: [ @msi_store.cart_item_manager ]
+        parent: msi_cmf.admin
+        tags:
+            - { name: msi.admin }
+
+    msi_store.cart_item_manager:
+        class: %msi_cmf.manager.class%
+        arguments: [ Msi\StoreBundle\Entity\CartItem ]
+        parent: msi_cmf.manager
+
+    # Product
+    msi_store_product_admin:
+        class: Msi\StoreBundle\Admin\ProductAdmin
+        arguments: [ @msi_store.product_manager ]
+        parent: msi_cmf.admin
+        tags:
+            - { name: msi.admin }
+
+    msi_store.product_manager:
+        class: %msi_cmf.manager.class%
+        arguments: [ Msi\StoreBundle\Entity\Product ]
+        parent: msi_cmf.manager
+
+    # ProductCategory
+    msi_store_product_category_admin:
+        class: Msi\StoreBundle\Admin\ProductCategoryAdmin
+        arguments: [ @msi_store.product_category_manager ]
+        parent: msi_cmf.admin
+        tags:
+            - { name: msi.admin }
+
+    msi_store.product_category_manager:
+        class: %msi_cmf.manager.class%
+        arguments: [ Msi\StoreBundle\Entity\ProductCategory ]
+        parent: msi_cmf.manager

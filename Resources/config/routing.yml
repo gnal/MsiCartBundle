@@ -1,3 +1,15 @@
-msi_cart_homepage:
-    pattern:  /hello/{name}
-    defaults: { _controller: MsiCartBundle:Default:index }
+msi_store_cart_item_list:
+    pattern:  /cart
+    defaults: { _controller: MsiStoreBundle:CartItem:list }
+
+msi_store_cart_item_new:
+    pattern:  /cart/new
+    defaults: { _controller: MsiStoreBundle:CartItem:new }
+
+msi_store_cart_item_edit:
+    pattern:  /cart/{id}/edit
+    defaults: { _controller: MsiStoreBundle:CartItem:edit }
+
+msi_store_cart_item_delete:
+    pattern:  /cart/{id}/delete
+    defaults: { _controller: MsiStoreBundle:CartItem:delete }

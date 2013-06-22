@@ -1,7 +1,20 @@
 parameters:
-#    msi_cart.example.class: Msi\CartBundle\Example
+#    msi_store.example.class: Msi\StoreBundle\Example
 
 services:
-#    msi_cart.example:
-#        class: %msi_cart.example.class%
-#        arguments: [@service_id, "plain_value", %parameter%]
+    msi_store.cart_provider:
+        class: Msi\StoreBundle\Cart\CartProvider
+        arguments: [ @service_container ]
+        scope: request
+
+    msi_store.cookie_listener:
+        class: Msi\StoreBundle\EventListener\CookieListener
+        arguments: [ @msi_store.cart_provider ]
+        scope: request
+
+    msi_store.twig.extension:
+        class: Msi\StoreBundle\Twig\Extension\StoreExtension
+        arguments: [ @service_container ]
+        tags:
+            - { name: twig.extension }
+        public: false

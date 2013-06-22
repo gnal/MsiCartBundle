@@ -1,6 +1,6 @@
 <?php
 
-namespace Msi\CartBundle\Tests\Controller;
+namespace Msi\StoreBundle\Tests\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
