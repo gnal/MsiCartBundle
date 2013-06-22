@@ -30,7 +30,7 @@ class CartItem
 
     /**
      * @ORM\ManyToOne(targetEntity="cart", inversedBy="items")
-     * @ORM\JoinColumn(onDelete="DELETE")
+     * @ORM\JoinColumn(onDelete="CASCADE")
      */
     protected $cart;
 

@@ -11,10 +11,10 @@
 <tbody>
     {% for item in cart.items %}
     <tr>
-        <td>dada</td>
-        <td>dada</td>
-        <td>dada</td>
-        <td>dada</td>
+        <td>{{ item.product.translation.name }}</td>
+        <td>00.00$</td>
+        <td>{{ item.quantity }}</td>
+        <td>00.00$</td>
     </tr>
     {% endfor %}
 </tbody>

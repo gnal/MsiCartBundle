@@ -28,11 +28,12 @@ class CartItemController extends Controller
         }
 
         if (!empty($item)) {
-            // $item->setQuantity($item->getQuantity() + $this->getRequest()->request->get('quantity'));
+            $item->setQuantity($item->getQuantity() + $this->getRequest()->request->get('quantity', 1));
         } else {
             $item = $this->get('msi_store.cart_item_manager')->create();
 
-            // $item->setQuantity($this->getRequest()->request->get('quantity'));
+            $item->setQuantity($this->getRequest()->request->get('quantity', 1));
+
             $item->setProduct($product);
             $item->setCart($cart);
             $cart->getItems()->add($item);
@@ -42,7 +43,7 @@ class CartItemController extends Controller
 
         $this->container->get('msi_store.cart_manager')->update($cart);
 
-        return null;
+        return $this->redirect($this->generateUrl('msi_store_product_list'));
     }
 
     public function editAction()
