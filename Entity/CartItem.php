@@ -18,6 +18,11 @@ class CartItem
     protected $id;
 
     /**
+     * @ORM\Column(type="integer")
+     */
+    protected $quantity;
+
+    /**
      * @ORM\ManyToOne(targetEntity="Product")
      * @ORM\JoinColumn(onDelete="SET NULL")
      */
@@ -25,8 +30,29 @@ class CartItem
 
     /**
      * @ORM\ManyToOne(targetEntity="cart", inversedBy="items")
+     * @ORM\JoinColumn(onDelete="DELETE")
      */
     protected $cart;
+
+    public function getQuantity()
+    {
+        return $this->quantity;
+    }
+
+    public function setQuantity($quantity)
+    {
+        if ($quantity > 999) {
+            $quantity = 999;
+        }
+
+        if ($quantity < 1) {
+            $quantity = 1;
+        }
+
+        $this->quantity = $quantity;
+
+        return $this;
+    }
 
     public function getProduct()
     {

@@ -31,8 +31,9 @@ class CartItemController extends Controller
             // $item->setQuantity($item->getQuantity() + $this->getRequest()->request->get('quantity'));
         } else {
             $item = $this->get('msi_store.cart_item_manager')->create();
-            $item->setProduct($product);
+
             // $item->setQuantity($this->getRequest()->request->get('quantity'));
+            $item->setProduct($product);
             $item->setCart($cart);
             $cart->getItems()->add($item);
         }

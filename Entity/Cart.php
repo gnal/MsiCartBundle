@@ -5,11 +5,15 @@ namespace Msi\StoreBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
 
+use Msi\CmfBundle\Doctrine\Extension\Timestampable\TimestampableInterface;
+
 /**
  * @ORM\Entity
  */
-class Cart
+class Cart implements TimestampableInterface
 {
+    use \Msi\CmfBundle\Doctrine\Extension\Timestampable\Traits\TimestampableEntity;
+
     /**
      * @ORM\Column(type="integer")
      * @ORM\Id
@@ -23,7 +27,7 @@ class Cart
     protected $frozenAt;
 
     /**
-     * @ORM\OneToMany(targetEntity="CartItem", mappedBy="cart")
+     * @ORM\OneToMany(targetEntity="CartItem", mappedBy="cart", cascade={"persist"})
      */
     protected $items;
 
