@@ -7,10 +7,19 @@ services:
         arguments: [ @service_container ]
         scope: request
 
+    msi_store.addition_strategy:
+        class: Msi\StoreBundle\Cart\DefaultAdditionStrategy
+
     msi_store.cookie_listener:
         class: Msi\StoreBundle\EventListener\CookieListener
         arguments: [ @msi_store.cart_provider ]
         scope: request
+
+    msi_store.login_listener:
+        class: Msi\StoreBundle\EventListener\LoginListener
+        arguments: [ @msi_store.cart_manager ]
+        tags:
+            - { name: kernel.event_listener, event: security.interactive_login }
 
     msi_store.twig.extension:
         class: Msi\StoreBundle\Twig\Extension\StoreExtension

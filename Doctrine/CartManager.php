@@ -32,4 +32,23 @@ class CartManager extends BaseManager
 
         return $qb->getQuery()->getOneOrNullResult();
     }
+
+    public function collectGarbage()
+    {
+        $qb = $this->orderManager->getFindByQueryBuilder();
+
+        $qb->andWhere($qb->expr()->isNull('a.frozenAt'));
+
+        $orders = $qb->getQuery()->execute();
+
+        foreach ($orders as $order) {
+            if ($order->getTransactions()->count()) {
+                continue;
+            }
+            if ($order->getUpdatedAt()->getTimestamp() > time() - 86400) {
+                continue;
+            }
+            $this->orderManager->delete($order);
+        }
+    }
 }

@@ -17,7 +17,7 @@ class CartItemController extends Controller
         $product = $this->container->get('msi_store.product_manager')->getOneBy(
             [
                 'a.id' => $this->getRequest()->query->get('product'),
-                // 'a.published' => true,
+                'a.published' => true,
             ]
         );
 

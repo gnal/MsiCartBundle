@@ -32,6 +32,7 @@ class StoreExtension extends \Twig_Extension
 
         if (!$this->container->get('request')->hasNamespace(['admin'])) {
             $globals['cart'] = $this->container->get('msi_store.cart_provider')->getCart();
+            $globals['additionStrategy'] = $this->container->get('msi_store.addition_strategy');
         }
 
         return $globals;

@@ -37,6 +37,11 @@ class Product implements TimestampableInterface, TranslatableInterface, Uploadab
     protected $published;
 
     /**
+     * @ORM\Column(type="boolean")
+     */
+    protected $taxable;
+
+    /**
      * @ORM\ManyToOne(targetEntity="ProductCategory")
      * @ORM\JoinColumn(onDelete="SET NULL")
      */
@@ -57,7 +62,20 @@ class Product implements TimestampableInterface, TranslatableInterface, Uploadab
     public function __construct()
     {
         $this->published = false;
+        $this->taxable = true;
         $this->translations = new ArrayCollection();
+    }
+
+    public function getTaxable()
+    {
+        return $this->taxable;
+    }
+
+    public function setTaxable($taxable)
+    {
+        $this->taxable = $taxable;
+
+        return $this;
     }
 
     public function getImage()

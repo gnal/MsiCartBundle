@@ -8,7 +8,11 @@ class ProductController extends Controller
 {
     public function listAction()
     {
-        $qb = $this->get('msi_store.product_manager')->getFindByQueryBuilder();
+        $qb = $this->get('msi_store.product_manager')->getFindByQueryBuilder(
+            [
+                'a.published' => true,
+            ]
+        );
 
         $products = $qb->getQuery()->execute();
 

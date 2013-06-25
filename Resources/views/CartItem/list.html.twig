@@ -12,10 +12,14 @@
     {% for item in cart.items %}
     <tr>
         <td>{{ item.product.translation.name }}</td>
-        <td>00.00$</td>
+        <td>${{ item.product.price }}</td>
         <td>{{ item.quantity }}</td>
-        <td>00.00$</td>
+        <td>${{ additionStrategy.cartItemTotal(item) }}</td>
     </tr>
     {% endfor %}
+    <tr>
+        <td colspan=3></td>
+        <td>${{ additionStrategy.cartTotal(cart) }}</td>
+    </tr>
 </tbody>
 </table>
