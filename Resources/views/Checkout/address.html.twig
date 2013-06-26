@@ -1,0 +1,61 @@
+{% extends 'PlaCoreBundle::layout.html.twig' %}
+
+{% block content %}
+<form method=POST action="{{ path('msi_store_checkout_address') }}">
+<div class="row">
+    <div class="span6">
+        <div class="well well-small" style="padding-top: 0;padding-bottom: 0;">
+            <h3>Adresse de livraison</h3>
+            <input type=text placeholder="* Prénom">
+            <input type=text placeholder="* Nom">
+            <br>
+            <input type=text placeholder="* Email">
+            <br>
+            <input type=text placeholder="Téléphone">
+            <input class="input-mini" type=text placeholder="Ext.">
+            <br>
+            <br>
+            <input type=text placeholder="* Adresse">
+            <input type=text placeholder="* Ville">
+            <br>
+            <input type=text placeholder="* Province" value="Québec" disabled>
+            <input type=text placeholder="* Code postal">
+        </div>
+    </div>
+    <div class="span6">
+        <div class="well well-small" style="padding-top: 0;padding-bottom: 0;position: relative;">
+            <div class="disabled-overlay"></div>
+            <h3>Adresse de facturation</h3>
+            <input type=text placeholder="* Prénom">
+            <input type=text placeholder="* Nom">
+            <br>
+            <input type=text placeholder="* Email">
+            <br>
+            <input type=text placeholder="Téléphone">
+            <input class="input-mini" type=text placeholder="Ext.">
+            <br>
+            <br>
+            <input type=text placeholder="* Adresse">
+            <input type=text placeholder="* Ville">
+            <br>
+            <input type=text placeholder="* Province" value="Québec" disabled>
+            <input type=text placeholder="* Code postal">
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="span6">
+        <p>
+            <label class="checkbox">
+                <input checked type="checkbox"> Les deux adresses sont identiques
+            </label>
+        </p>
+    </div>
+    <div class="span6">
+        <p class="text-right">
+            <button class="btn btn-primary" type=submit>Checkout</button>
+        </p>
+    </div>
+</div>
+</form>
+{% endblock %}

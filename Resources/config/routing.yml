@@ -21,3 +21,17 @@ msi_store_cart_item_edit:
 msi_store_cart_item_delete:
     pattern:  /cart/{id}/delete
     defaults: { _controller: MsiStoreBundle:CartItem:delete }
+
+# Checkout
+
+msi_store_checkout_address:
+    pattern:  /checkout/address
+    defaults: { _controller: MsiStoreBundle:Checkout:address }
+
+msi_store_checkout_summary:
+    pattern:  /checkout/summary
+    defaults: { _controller: MsiStoreBundle:Checkout:summary }
+
+msi_store_checkout_process:
+    pattern:  /checkout/process
+    defaults: { _controller: MsiStoreBundle:Checkout:process }

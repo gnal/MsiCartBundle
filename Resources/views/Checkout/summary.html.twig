@@ -1,0 +1,86 @@
+{% extends 'PlaCoreBundle::layout.html.twig' %}
+
+{% block content %}
+<h2>Récapitulatif de la commande</h2>
+<table class="table">
+<thead>
+    <tr>
+        <th>produit</th>
+        <th>prix</th>
+        <th>quantité</th>
+        <th><div class="text-right">total</div></th>
+    </tr>
+</thead>
+<tbody>
+    {% for item in cart.items %}
+    <tr>
+        <td>{{ item.product.translation.name }}</td>
+        <td>{{ item.product.price }} $</td>
+        <td>{{ item.quantity }}</td>
+        <td><div class="text-right">{{ additionStrategy.cartItemTotal(item)|number_format(2) }} $</div></td>
+    </tr>
+    {% endfor %}
+    <tr>
+        <td style="background: #f9f9f9;" colspan=2></td>
+        <td style="background: #f9f9f9;">Subtotal :</td>
+        <td style="background: #f9f9f9;"><div class="text-right">{{ additionStrategy.cartSubtotal(cart)|number_format(2) }} $</div></td>
+    </tr>
+    <tr>
+        <td style="background: #f9f9f9;" colspan=2></td>
+        <td style="background: #f9f9f9;">TPS :</td>
+        <td style="background: #f9f9f9;"><div class="text-right">{{ additionStrategy.gstTotal(cart)|number_format(2) }} $</div></td>
+    </tr>
+    <tr>
+        <td style="background: #f9f9f9;" colspan=2></td>
+        <td style="background: #f9f9f9;">TVQ :</td>
+        <td style="background: #f9f9f9;"><div class="text-right">{{ additionStrategy.pstTotal(cart)|number_format(2) }} $</div></td>
+    </tr>
+    <tr>
+        <td style="background: #f9f9f9;" colspan=2></td>
+        <td style="background: #f9f9f9;">Total :</td>
+        <td style="background: #f9f9f9;"><div class="text-right">{{ additionStrategy.cartTotal(cart)|number_format(2) }} $</div></td>
+    </tr>
+</tbody>
+</table>
+<div class="row">
+    <div class="span4">
+        <h2>Adresse</h2>
+        <h5>Livrasion :</h5>
+        <p class="well well-small">
+            <a class="pull-right" href="#"><i class="icon-pencil"></i></a>
+            <small>
+                Alexis Joubert
+                <br>
+                alexisjoubert@groupemsi.com
+                <br>
+                514 826-5695 #101
+                <br>
+                <br>
+                5803, rue Sherbrooke Est
+                <br>
+                Montréal (Québec) H1N 1N7
+            </small>
+        </p>
+        <h5>Facturation :</h5>
+        <p class="well well-small">
+            <a class="pull-right" href="#"><i class="icon-pencil"></i></a>
+            <small>
+                Alexis Joubert
+                <br>
+                alexisjoubert@groupemsi.com
+                <br>
+                514 826-5695 #101
+                <br>
+                <br>
+                5803, rue Sherbrooke Est
+                <br>
+                Montréal (Québec) H1N 1N7
+            </small>
+        </p>
+    </div>
+    <div class="span8">
+        <h2>Informations de paiement</h2>
+        // form de paiement
+    </div>
+</div>
+{% endblock %}

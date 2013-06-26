@@ -11,7 +11,13 @@ class CartManager extends BaseManager
         $qb = $this->getFindByQueryBuilder(
             [
                 'a.id' => $cookie,
-            ]
+            ],
+            [
+                'a.items' => 'i',
+                'i.product' => 'p',
+                'p.translations' => 'pt',
+            ],
+            ['pt.name' => 'ASC']
         );
 
         $qb->andWhere($qb->expr()->isNull('a.user'));
@@ -25,7 +31,13 @@ class CartManager extends BaseManager
         $qb = $this->getFindByQueryBuilder(
             [
                 'a.user' => $user,
-            ]
+            ],
+            [
+                'a.items' => 'i',
+                'i.product' => 'p',
+                'p.translations' => 'pt',
+            ],
+            ['pt.name' => 'ASC']
         );
 
         $qb->andWhere($qb->expr()->isNull('a.frozenAt'));
@@ -35,20 +47,20 @@ class CartManager extends BaseManager
 
     public function collectGarbage()
     {
-        $qb = $this->orderManager->getFindByQueryBuilder();
+        $qb = $this->getFindByQueryBuilder();
 
         $qb->andWhere($qb->expr()->isNull('a.frozenAt'));
 
-        $orders = $qb->getQuery()->execute();
+        $carts = $qb->getQuery()->execute();
 
-        foreach ($orders as $order) {
-            if ($order->getTransactions()->count()) {
+        foreach ($carts as $cart) {
+            // if ($cart->getTransactions()->count()) {
+            //     continue;
+            // }
+            if ($cart->getUpdatedAt()->getTimestamp() > time() - 86400) {
                 continue;
             }
-            if ($order->getUpdatedAt()->getTimestamp() > time() - 86400) {
-                continue;
-            }
-            $this->orderManager->delete($order);
+            $this->delete($cart);
         }
     }
 }
