@@ -1,7 +1,7 @@
 {% extends 'PlaCoreBundle::layout.html.twig' %}
 
 {% block content %}
-<h2>Récapitulatif de la commande</h2>
+<h2>Order Summary</h2>
 <table class="table">
 <thead>
     <tr>
@@ -44,42 +44,42 @@
 </table>
 <div class="row">
     <div class="span4">
-        <h2>Adresse</h2>
-        <h5>Livrasion :</h5>
-        <p class="well well-small">
-            <a class="pull-right" href="#"><i class="icon-pencil"></i></a>
-            <small>
+        <h2>Addresses</h2>
+        <div class="well well-small" style="padding-top: 0;padding-bottom: 0;">
+            <a class="pull-right" style="margin: 10px 0;" href="#"><i style="margin: 0;" class="icon-pencil"></i></a>
+            <h4>Shipping</h4>
+            <p>
                 Alexis Joubert
                 <br>
                 alexisjoubert@groupemsi.com
                 <br>
                 514 826-5695 #101
-                <br>
-                <br>
+            </p>
+            <p>
                 5803, rue Sherbrooke Est
                 <br>
                 Montréal (Québec) H1N 1N7
-            </small>
-        </p>
-        <h5>Facturation :</h5>
-        <p class="well well-small">
-            <a class="pull-right" href="#"><i class="icon-pencil"></i></a>
-            <small>
+            </p>
+        </div>
+        <div class="well well-small" style="padding-top: 0;padding-bottom: 0;">
+            <a class="pull-right" style="margin: 10px 0;" href="#"><i style="margin: 0;" class="icon-pencil"></i></a>
+            <h4>Billing</h4>
+            <p>
                 Alexis Joubert
                 <br>
                 alexisjoubert@groupemsi.com
                 <br>
                 514 826-5695 #101
-                <br>
-                <br>
+            </p>
+            <p>
                 5803, rue Sherbrooke Est
                 <br>
                 Montréal (Québec) H1N 1N7
-            </small>
-        </p>
+            </p>
+        </div>
     </div>
     <div class="span8">
-        <h2>Informations de paiement</h2>
+        <h2>Payment Information</h2>
         // form de paiement
     </div>
 </div>

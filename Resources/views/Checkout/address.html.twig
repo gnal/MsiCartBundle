@@ -6,56 +6,83 @@
     <div class="span6">
         <div class="well well-small" style="padding-top: 0;padding-bottom: 0;">
             <h3>Adresse de livraison</h3>
-            <input type=text placeholder="* Prénom">
-            <input type=text placeholder="* Nom">
+            <a href="#">Pick an address from my account</a>
             <br>
-            <input type=text placeholder="* Email">
-            <br>
-            <input type=text placeholder="Téléphone">
-            <input class="input-mini" type=text placeholder="Ext.">
+            <a class="copyaddress" data-copy-from="billing" data-copy-to="shipping" href="#">Copy billing address</a>
             <br>
             <br>
-            <input type=text placeholder="* Adresse">
-            <input type=text placeholder="* Ville">
+            {{ form_widget(form.shippingFirstName) }}
+            {{ form_widget(form.shippingLastName) }}
             <br>
-            <input type=text placeholder="* Province" value="Québec" disabled>
-            <input type=text placeholder="* Code postal">
+            {{ form_widget(form.shippingEmail) }}
+            <br>
+            {{ form_widget(form.shippingPhone) }}
+            {{ form_widget(form.shippingPhoneExt) }}
+            <br>
+            <br>
+            {{ form_widget(form.shippingAddress) }}
+            {{ form_widget(form.shippingCity) }}
+            <br>
+            {{ form_widget(form.shippingProvince) }}
+            {{ form_widget(form.shippingZip) }}
+            <br>
+            {{ form_widget(form.shippingCountry) }}
         </div>
     </div>
     <div class="span6">
-        <div class="well well-small" style="padding-top: 0;padding-bottom: 0;position: relative;">
-            <div class="disabled-overlay"></div>
+        <div class="well well-small" style="padding-top: 0;padding-bottom: 0;">
             <h3>Adresse de facturation</h3>
-            <input type=text placeholder="* Prénom">
-            <input type=text placeholder="* Nom">
+            <a href="#">Pick an address from my account</a>
             <br>
-            <input type=text placeholder="* Email">
-            <br>
-            <input type=text placeholder="Téléphone">
-            <input class="input-mini" type=text placeholder="Ext.">
+            <a class="copyaddress" data-copy-from="shipping" data-copy-to="billing" href="#">Copy shipping address</a>
             <br>
             <br>
-            <input type=text placeholder="* Adresse">
-            <input type=text placeholder="* Ville">
+            {{ form_widget(form.billingFirstName) }}
+            {{ form_widget(form.billingLastName) }}
             <br>
-            <input type=text placeholder="* Province" value="Québec" disabled>
-            <input type=text placeholder="* Code postal">
+            {{ form_widget(form.billingEmail) }}
+            <br>
+            {{ form_widget(form.billingPhone) }}
+            {{ form_widget(form.billingPhoneExt) }}
+            <br>
+            <br>
+            {{ form_widget(form.billingAddress) }}
+            {{ form_widget(form.billingCity) }}
+            <br>
+            {{ form_widget(form.billingProvince) }}
+            {{ form_widget(form.billingZip) }}
+            <br>
+            {{ form_widget(form.billingCountry) }}
         </div>
     </div>
 </div>
-<div class="row">
-    <div class="span6">
-        <p>
-            <label class="checkbox">
-                <input checked type="checkbox"> Les deux adresses sont identiques
-            </label>
-        </p>
-    </div>
-    <div class="span6">
-        <p class="text-right">
-            <button class="btn btn-primary" type=submit>Checkout</button>
-        </p>
-    </div>
-</div>
+<p class="text-right">
+    <button class="btn btn-primary" type=submit>Continue checkout</button>
+</p>
+{{ form_rest(form) }}
 </form>
+{% endblock %}
+
+
+{% block js %}
+{{ parent() }}
+<script>
+(function($) {
+    "use strict";
+    $('a.copyaddress').on('click', function(e) {
+        e.preventDefault();
+        var $this = $(this);
+        $('#msi_store_checkout_address_'+$this.data('copy-to')+'FirstName').val($('#msi_store_checkout_address_'+$this.data('copy-from')+'FirstName').val());
+        $('#msi_store_checkout_address_'+$this.data('copy-to')+'LastName').val($('#msi_store_checkout_address_'+$this.data('copy-from')+'LastName').val());
+        $('#msi_store_checkout_address_'+$this.data('copy-to')+'Email').val($('#msi_store_checkout_address_'+$this.data('copy-from')+'Email').val());
+        $('#msi_store_checkout_address_'+$this.data('copy-to')+'Phone').val($('#msi_store_checkout_address_'+$this.data('copy-from')+'Phone').val());
+        $('#msi_store_checkout_address_'+$this.data('copy-to')+'PhoneExt').val($('#msi_store_checkout_address_'+$this.data('copy-from')+'PhoneExt').val());
+        $('#msi_store_checkout_address_'+$this.data('copy-to')+'Address').val($('#msi_store_checkout_address_'+$this.data('copy-from')+'Address').val());
+        $('#msi_store_checkout_address_'+$this.data('copy-to')+'City').val($('#msi_store_checkout_address_'+$this.data('copy-from')+'City').val());
+        $('#msi_store_checkout_address_'+$this.data('copy-to')+'Province').val($('#msi_store_checkout_address_'+$this.data('copy-from')+'Province').val());
+        $('#msi_store_checkout_address_'+$this.data('copy-to')+'Zip').val($('#msi_store_checkout_address_'+$this.data('copy-from')+'Zip').val());
+        $('#msi_store_checkout_address_'+$this.data('copy-to')+'Country').val($('#msi_store_checkout_address_'+$this.data('copy-from')+'Country').val());
+    });
+})(jQuery);
+</script>
 {% endblock %}
