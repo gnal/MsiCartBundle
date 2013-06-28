@@ -49,32 +49,36 @@
             <a class="pull-right" style="margin: 10px 0;" href="#"><i style="margin: 0;" class="icon-pencil"></i></a>
             <h4>Shipping</h4>
             <p>
-                Alexis Joubert
+                {{ cart.shippingFirstName }} {{ cart.shippingLastName }}
                 <br>
-                alexisjoubert@groupemsi.com
-                <br>
-                514 826-5695 #101
+                {{ cart.shippingEmail }}
+                {% if cart.shippingPhone %}
+                    <br>
+                    {{ cart.shippingPhone }} #{{ cart.shippingPhoneExt }}
+                {% endif %}
             </p>
             <p>
-                5803, rue Sherbrooke Est
+                {{ cart.shippingAddress }}
                 <br>
-                Montréal (Québec) H1N 1N7
+                {{ cart.shippingCity }} ({{ cart.shippingProvince }}) {{ cart.shippingZip }}
             </p>
         </div>
         <div class="well well-small" style="padding-top: 0;padding-bottom: 0;">
             <a class="pull-right" style="margin: 10px 0;" href="#"><i style="margin: 0;" class="icon-pencil"></i></a>
             <h4>Billing</h4>
             <p>
-                Alexis Joubert
+                {{ cart.billingFirstName }} {{ cart.billingLastName }}
                 <br>
-                alexisjoubert@groupemsi.com
-                <br>
-                514 826-5695 #101
+                {{ cart.billingEmail }}
+                {% if cart.billingPhone %}
+                    <br>
+                    {{ cart.billingPhone }} #{{ cart.billingPhoneExt }}
+                {% endif %}
             </p>
             <p>
-                5803, rue Sherbrooke Est
+                {{ cart.billingAddress }}
                 <br>
-                Montréal (Québec) H1N 1N7
+                {{ cart.billingCity }} ({{ cart.billingProvince }}) {{ cart.billingZip }}
             </p>
         </div>
     </div>

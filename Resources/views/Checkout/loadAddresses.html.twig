@@ -1,0 +1,9 @@
+<a style="line-height: 40px;" class="pull-right" href="#">Back</a>
+<h3>Choose an address</h3>
+{% if addresses|length %}
+<ul class="nav nav-tabs nav-stacked">
+{% for address in addresses %}
+    <li><a class="msi_store_checkout_pick_address" data-id="{{ address.id }}" href="#">{{ address.address }}</a></li>
+{% endfor %}
+</ul>
+{% endif %}

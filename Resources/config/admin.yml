@@ -53,3 +53,16 @@ services:
         class: %msi_cmf.manager.class%
         arguments: [ Msi\StoreBundle\Entity\ProductCategory ]
         parent: msi_cmf.manager
+
+    # Address
+    msi_store_address_admin:
+        class: Msi\StoreBundle\Admin\AddressAdmin
+        arguments: [ @msi_store.address_manager ]
+        parent: msi_cmf.admin
+        tags:
+            - { name: msi.admin }
+
+    msi_store.address_manager:
+        class: %msi_cmf.manager.class%
+        arguments: [ Msi\StoreBundle\Entity\Address ]
+        parent: msi_cmf.manager

@@ -49,7 +49,7 @@ class Cart implements TimestampableInterface
     protected $shippingPhone;
 
     /**
-     * @ORM\Column(type="string", nullable=true)
+     * @ORM\Column(type="integer", nullable=true)
      */
     protected $shippingPhoneExt;
 
@@ -101,7 +101,7 @@ class Cart implements TimestampableInterface
     protected $billingPhone;
 
     /**
-     * @ORM\Column(type="string", nullable=true)
+     * @ORM\Column(type="integer", nullable=true)
      */
     protected $billingPhoneExt;
 
@@ -425,5 +425,10 @@ class Cart implements TimestampableInterface
     public function getId()
     {
         return $this->id;
+    }
+
+    public function __toString()
+    {
+        return (string) $this->id;
     }
 }

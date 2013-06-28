@@ -3,6 +3,7 @@
 namespace Msi\StoreBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\JsonResponse;
 
 class CheckoutController extends Controller
 {
@@ -36,6 +37,29 @@ class CheckoutController extends Controller
         return $this->render('MsiStoreBundle:Checkout:address.html.twig', [
             'form' => $form->createView(),
         ]);
+    }
+
+    public function loadAddressesAction()
+    {
+        $addresses = $this->get('msi_store.address_manager')->getFindByQueryBuilder(
+            [
+                'a.user' => $this->getUser(),
+            ]
+        )->getQuery()->getArrayResult();
+
+        return $this->render('MsiStoreBundle:Checkout:loadAddresses.html.twig', ['addresses' => $addresses]);
+    }
+
+    public function pickAddressAction()
+    {
+        $address = $this->get('msi_store.address_manager')->getFindByQueryBuilder(
+            [
+                'a.user' => $this->getUser(),
+                'a.id' => $this->getRequest()->query->get('address'),
+            ]
+        )->getQuery()->getArrayResult()[0];
+
+        return new JsonResponse($address);
     }
 
     public function summaryAction()

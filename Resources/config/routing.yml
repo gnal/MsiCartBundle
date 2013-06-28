@@ -28,6 +28,14 @@ msi_store_checkout_address:
     pattern:  /checkout/address
     defaults: { _controller: MsiStoreBundle:Checkout:address }
 
+msi_store_checkout_load_addresses:
+    pattern:  /checkout/load-addresses
+    defaults: { _controller: MsiStoreBundle:Checkout:loadAddresses }
+
+msi_store_checkout_pick_address:
+    pattern:  /checkout/pick-address
+    defaults: { _controller: MsiStoreBundle:Checkout:pickAddress }
+
 msi_store_checkout_summary:
     pattern:  /checkout/summary
     defaults: { _controller: MsiStoreBundle:Checkout:summary }

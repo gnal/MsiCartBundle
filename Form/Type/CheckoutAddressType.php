@@ -6,6 +6,8 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 use Symfony\Component\Validator\Constraints\NotBlank;
+use Symfony\Component\Validator\Constraints\Email;
+use Symfony\Component\Validator\Constraints\Regex;
 
 class CheckoutAddressType extends AbstractType
 {
@@ -25,20 +27,20 @@ class CheckoutAddressType extends AbstractType
                 ],
             ])
             ->add('shippingEmail', 'email', [
-                'constraints' => [new NotBlank()],
+                'constraints' => [new NotBlank(), new Email()],
                 'attr' => [
                     'placeholder' => '* Email',
                 ],
             ])
             ->add('shippingPhone', 'text', [
-                'constraints' => [new NotBlank()],
                 'attr' => [
                     'placeholder' => 'Phone',
                 ],
             ])
             ->add('shippingPhoneExt', 'text', [
+                'constraints' => [new Regex(['pattern' => '@^\d+$@'])],
                 'attr' => [
-                    'class' => 'input-mini',
+                    'style' => 'width: 50%;',
                     'placeholder' => 'Ext.',
                 ],
             ])
@@ -85,20 +87,20 @@ class CheckoutAddressType extends AbstractType
                 ],
             ])
             ->add('billingEmail', 'email', [
-                'constraints' => [new NotBlank()],
+                'constraints' => [new NotBlank(), new Email()],
                 'attr' => [
                     'placeholder' => '* Email',
                 ],
             ])
             ->add('billingPhone', 'text', [
-                'constraints' => [new NotBlank()],
                 'attr' => [
                     'placeholder' => 'Phone',
                 ],
             ])
             ->add('billingPhoneExt', 'text', [
+                'constraints' => [new Regex(['pattern' => '@^\d+$@'])],
                 'attr' => [
-                    'class' => 'input-mini',
+                    'style' => 'width: 50%;',
                     'placeholder' => 'Ext.',
                 ],
             ])
