@@ -18,7 +18,7 @@ class ProductController extends Controller
             ]
         );
 
-        $products = $qb->getQuery()->getArrayResult();
+        $products = $qb->getQuery()->execute();
 
         return $this->render('MsiStoreBundle:Product:list.html.twig', ['products' => $products]);
     }

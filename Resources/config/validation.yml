@@ -1,9 +1,18 @@
+# Product
+
 Msi\StoreBundle\Entity\Product:
     properties:
         price:
             - NotBlank: ~
 
 Msi\StoreBundle\Entity\ProductTranslation:
+    properties:
+        name:
+            - NotBlank: ~
+
+# Product Category
+
+Msi\StoreBundle\Entity\ProductCategoryTranslation:
     properties:
         name:
             - NotBlank: ~

@@ -32,6 +32,21 @@ class Product implements TimestampableInterface, TranslatableInterface, Uploadab
     protected $price;
 
     /**
+     * @ORM\Column(type="decimal", scale=2, nullable=true)
+     */
+    protected $discountedPrice;
+
+    /**
+     * @ORM\Column(type="datetime", nullable=true)
+     */
+    protected $discountedFrom;
+
+    /**
+     * @ORM\Column(type="datetime", nullable=true)
+     */
+    protected $discountedTo;
+
+    /**
      * @ORM\Column(type="boolean")
      */
     protected $published;
@@ -64,6 +79,87 @@ class Product implements TimestampableInterface, TranslatableInterface, Uploadab
         $this->published = false;
         $this->taxable = true;
         $this->translations = new ArrayCollection();
+    }
+
+    public function getRightPrice()
+    {
+        if ($this->isDiscounted()) {
+            return $this->getDiscountedPrice();
+        } else {
+            return $this->getPrice();
+        }
+    }
+
+    public function getDiscount()
+    {
+        if ($this->isDiscounted()) {
+            return $this->getDiscountedPrice();
+        } else {
+            return '';
+        }
+    }
+
+    public function isDiscounted()
+    {
+        if (!$this->getDiscountedPrice()) {
+            return false;
+        }
+
+        if ($this->getDiscountedFrom() && $this->getDiscountedTo()) {
+            if (date('Y-m-d') >= $this->getDiscountedFrom()->format('Y-m-d') && date('Y-m-d') <= $this->getDiscountedTo()->format('Y-m-d')) {
+                return true;
+            }
+        }
+
+        if ($this->getDiscountedFrom() && !$this->getDiscountedTo()) {
+            if (date('Y-m-d') >= $this->getDiscountedFrom()->format('Y-m-d')) {
+                return true;
+            }
+        }
+
+        if (!$this->getDiscountedFrom() && $this->getDiscountedTo()) {
+            if (date('Y-m-d') <= $this->getDiscountedTo()->format('Y-m-d')) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    public function getDiscountedPrice()
+    {
+        return $this->discountedPrice;
+    }
+
+    public function setDiscountedPrice($discountedPrice)
+    {
+        $this->discountedPrice = $discountedPrice;
+
+        return $this;
+    }
+
+    public function getDiscountedFrom()
+    {
+        return $this->discountedFrom;
+    }
+
+    public function setDiscountedFrom($discountedFrom)
+    {
+        $this->discountedFrom = $discountedFrom;
+
+        return $this;
+    }
+
+    public function getDiscountedTo()
+    {
+        return $this->discountedTo;
+    }
+
+    public function setDiscountedTo($discountedTo)
+    {
+        $this->discountedTo = $discountedTo;
+
+        return $this;
     }
 
     public function getTaxable()

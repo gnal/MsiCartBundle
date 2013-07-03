@@ -7,3 +7,13 @@ entity:
 
 Shippingname: Ship to
 Billingname: Bill to
+
+# product admin
+
+Discountedprice: Discount
+Discountedfrom: Discount from
+Discountedto: Discount to
+Imagefile: Image
+Category: Category
+Price: Price
+Discount: Discount

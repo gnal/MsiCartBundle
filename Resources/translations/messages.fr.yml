@@ -7,3 +7,13 @@ entity:
 
 Shippingname: Livrer à
 Billingname: Facturer à
+
+# product admin
+
+Discountedprice: Spécial
+Discountedfrom: Spécial du
+Discountedto: Spécial au
+Imagefile: Image
+Category: Catégorie
+Price: Prix
+Discount: Spécial

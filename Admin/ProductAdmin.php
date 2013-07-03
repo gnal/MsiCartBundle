@@ -27,6 +27,9 @@ class ProductAdmin extends Admin
             ->add('name')
             ->add('category')
             ->add('price')
+            ->add('discount', 'text', [
+                'truncate' => false,
+            ])
             ->add('', 'action')
         ;
     }
@@ -36,8 +39,29 @@ class ProductAdmin extends Admin
         $builder
             ->add('published')
             ->add('category')
-            ->add('price')
+            ->add('price', 'money', [
+                'currency' => false,
+            ])
             ->add('taxable')
+            ->add('discountedPrice', 'money', [
+                'currency' => false,
+            ])
+            ->add('discountedFrom', 'date', [
+                'input' => 'datetime',
+                'format' => 'dd-MM-yyyy',
+                'widget' => 'single_text',
+                'attr' => [
+                    'class' => 'datepicker',
+                ],
+            ])
+            ->add('discountedTo', 'date', [
+                'input' => 'datetime',
+                'format' => 'dd-MM-yyyy',
+                'widget' => 'single_text',
+                'attr' => [
+                    'class' => 'datepicker',
+                ],
+            ])
             ->add('imageFile', 'file')
         ;
     }

@@ -9,9 +9,13 @@ class DefaultAdditionStrategy
 {
     public function cartItemTotal(CartItem $item)
     {
-        $total = $item->getProduct()->getPrice() * $item->getQuantity();
+        if ($item->getProduct()->isDiscounted()) {
+            $price = $item->getProduct()->getDiscountedPrice();
+        } else {
+            $price = $item->getProduct()->getPrice();
+        }
 
-        return round($total, 2);
+        return round($price * $item->getQuantity(), 2);
     }
 
     public function cartSubtotal(Cart $cart)
