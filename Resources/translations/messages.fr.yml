@@ -1,0 +1,9 @@
+entity:
+    Cart: Cart|Carts
+    ProductCategory: Catégorie|Catégories
+    Product: Produit|Produits
+
+# cart admin
+
+Shippingname: Livrer à
+Billingname: Facturer à

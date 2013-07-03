@@ -1,13 +1,14 @@
 {% extends 'PlaCoreBundle::layout.html.twig' %}
 
 {% block content %}
+<h2>Addresses</h2>
 <form class="msi_store_checkout_address" novalidate method=POST action="{{ path('msi_store_checkout_address') }}">
 {% form_theme form 'MsiStoreBundle:Checkout:address_form_theme.html.twig' %}
 <div class="row">
     <div class="span6">
         <div class="well well-small" style="padding-top: 0;padding-bottom: 0;">
         <div class="da-form">
-            <h3>Adresse de livraison</h3>
+            <h3>Shipping Address</h3>
             <a href="#" class="msi_store_checkout_load_address" data-address="shipping">Pick an address from my account</a>
             <br>
             <a class="copyaddress" data-copy-from="billing" data-copy-to="shipping" href="#">Copy billing address</a>
@@ -71,7 +72,7 @@
     <div class="span6">
         <div class="well well-small" style="padding-top: 0;padding-bottom: 0;">
         <div class="da-form">
-            <h3>Adresse de facturation</h3>
+            <h3>Billing Address</h3>
             <a href="#" class="msi_store_checkout_load_address" data-address="billing">Pick an address from my account</a>
             <br>
             <a class="copyaddress" data-copy-from="shipping" data-copy-to="billing" href="#">Copy shipping address</a>

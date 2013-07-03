@@ -1,0 +1,9 @@
+Msi\StoreBundle\Entity\Product:
+    properties:
+        price:
+            - NotBlank: ~
+
+Msi\StoreBundle\Entity\ProductTranslation:
+    properties:
+        name:
+            - NotBlank: ~

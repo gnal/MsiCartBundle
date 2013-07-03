@@ -1,0 +1,9 @@
+entity:
+    Cart: Cart|Carts
+    ProductCategory: Categorie|Categories
+    Product: Product|Products
+
+# cart admin
+
+Shippingname: Ship to
+Billingname: Bill to
