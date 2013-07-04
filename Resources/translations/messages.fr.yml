@@ -8,6 +8,8 @@ entity:
 
 Shippingname: Livrer à
 Billingname: Facturer à
+Frozenat: Date
+Id: "#"
 
 # product admin
 

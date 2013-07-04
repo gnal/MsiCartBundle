@@ -8,6 +8,8 @@ entity:
 
 Shippingname: Ship to
 Billingname: Bill to
+Frozenat: Date
+Id: "#"
 
 # product admin
 
