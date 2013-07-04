@@ -2,6 +2,7 @@ entity:
     Cart: Cart|Carts
     ProductCategory: Categorie|Categories
     Product: Product|Products
+    CartStatus: Status|Statuses
 
 # cart admin
 

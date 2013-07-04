@@ -14,10 +14,6 @@ class Cart implements TimestampableInterface
 {
     use \Msi\CmfBundle\Doctrine\Extension\Timestampable\Traits\TimestampableEntity;
 
-    const STATUS_PENDING = 'pending';
-    const STATUS_CANCELED = 'canceled';
-    const STATUS_COMPLETED = 'completed';
-
     /**
      * @ORM\Column(type="integer")
      * @ORM\Id
@@ -31,9 +27,9 @@ class Cart implements TimestampableInterface
     protected $frozenAt;
 
     /**
-     * @ORM\Column(type="integer", nullable=true)
+     * @ORM\Column(type="string", nullable=true)
      */
-    protected $status;
+    protected $ip;
 
     // shipping
 
@@ -150,6 +146,11 @@ class Cart implements TimestampableInterface
      */
     protected $user;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="CartStatus")
+     */
+    protected $status;
+
     public function __construct()
     {
         $this->items = new ArrayCollection();
@@ -163,6 +164,30 @@ class Cart implements TimestampableInterface
     public function getBillingName()
     {
         return $this->getBillingFirstName().' '.$this->getBillingLastName();
+    }
+
+    public function getIp()
+    {
+        return $this->ip;
+    }
+
+    public function setIp($ip)
+    {
+        $this->ip = $ip;
+
+        return $this;
+    }
+
+    public function getStatus()
+    {
+        return $this->status;
+    }
+
+    public function setStatus($status)
+    {
+        $this->status = $status;
+
+        return $this;
     }
 
     public function getShippingFirstName()
@@ -413,7 +438,6 @@ class Cart implements TimestampableInterface
     public function setFrozenAt($frozenAt)
     {
         $this->frozenAt = $frozenAt;
-        $this->status = self::STATUS_PENDING;
 
         return $this;
     }

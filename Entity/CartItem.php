@@ -23,6 +23,22 @@ class CartItem
     protected $quantity;
 
     /**
+     * @ORM\Column(type="string", nullable=true)
+     */
+    protected $name;
+
+    /**
+     * @ORM\Column(type="decimal", scale=2, nullable=true)
+     */
+    protected $price;
+
+    /**
+     * @ORM\Column(type="decimal", scale=2, nullable=true)
+     */
+    protected $total;
+
+
+    /**
      * @ORM\ManyToOne(targetEntity="Product")
      * @ORM\JoinColumn(onDelete="SET NULL")
      */
@@ -50,6 +66,42 @@ class CartItem
         }
 
         $this->quantity = $quantity;
+
+        return $this;
+    }
+
+    public function getName()
+    {
+        return $this->name;
+    }
+
+    public function setName($name)
+    {
+        $this->name = $name;
+
+        return $this;
+    }
+
+    public function getPrice()
+    {
+        return $this->price;
+    }
+
+    public function setPrice($price)
+    {
+        $this->price = $price;
+
+        return $this;
+    }
+
+    public function getTotal()
+    {
+        return $this->total;
+    }
+
+    public function setTotal($total)
+    {
+        $this->total = $total;
 
         return $this;
     }

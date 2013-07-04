@@ -9,7 +9,7 @@ class CheckoutController extends Controller
 {
     public function addressAction()
     {
-        $cart = $this->container->get('msi_store.cart_provider')->getCart();
+        $cart = $this->get('msi_store.cart_provider')->getCart();
 
         $builder = $this->get('form.factory')->createBuilder(new \Msi\StoreBundle\Form\Type\CheckoutAddressType());
         $form = $builder->getForm();
@@ -28,7 +28,7 @@ class CheckoutController extends Controller
         if ('POST' === $this->getRequest()->getMethod()) {
             $form->bind($this->getRequest());
             if ($form->isValid()) {
-                $this->container->get('msi_store.cart_manager')->update($cart);
+                $this->get('msi_store.cart_manager')->update($cart);
 
                 return $this->redirect($this->generateUrl('msi_store_checkout_summary'));
             }
@@ -69,6 +69,24 @@ class CheckoutController extends Controller
 
     public function processAction()
     {
+        $strat = $this->get('msi_store.addition_strategy');
+        $cart = $this->get('msi_store.cart_provider')->getCart();
 
+        $cart
+            ->setFrozenAt(new \DateTime())
+            ->setIp($this->getRequest()->getClientIp())
+            ->setStatus($this->get('msi_store.cart_status_manager')->getOneBy(['a.id' => 1]))
+        ;
+
+        foreach ($cart->getItems() as $item) {
+            $product = $item->getProduct();
+            $item
+                ->setName($product->getTranslation()->getName())
+                ->setPrice($product->getPrice())
+                ->setTotal($strat->cartItemTotal($item))
+            ;
+        }
+
+        $this->container->get('msi_store.cart_manager')->update($cart);
     }
 }

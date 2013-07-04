@@ -66,3 +66,16 @@ services:
         class: %msi_cmf.manager.class%
         arguments: [ Msi\StoreBundle\Entity\Address ]
         parent: msi_cmf.manager
+
+    # CartStatus
+    msi_store_cart_status_admin:
+        class: Msi\StoreBundle\Admin\CartStatusAdmin
+        arguments: [ @msi_store.cart_status_manager ]
+        parent: msi_cmf.admin
+        tags:
+            - { name: msi.admin }
+
+    msi_store.cart_status_manager:
+        class: %msi_cmf.manager.class%
+        arguments: [ Msi\StoreBundle\Entity\CartStatus ]
+        parent: msi_cmf.manager
