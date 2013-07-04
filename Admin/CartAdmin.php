@@ -18,6 +18,7 @@ class CartAdmin extends Admin
             ])
             ->add('shippingName')
             ->add('billingName')
+            ->add('total')
             ->add('status')
             ->add('', 'action')
         ;
@@ -33,6 +34,5 @@ class CartAdmin extends Admin
     public function buildListQuery(QueryBuilder $qb)
     {
         $qb->andWhere($qb->expr()->isNotNull('a.status'));
-        $qb->join('a.items', 'i');
     }
 }

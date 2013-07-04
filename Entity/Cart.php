@@ -31,6 +31,11 @@ class Cart implements TimestampableInterface
      */
     protected $ip;
 
+    /**
+     * @ORM\Column(type="decimal", scale=2, nullable=true)
+     */
+    protected $total;
+
     // shipping
 
     /**
@@ -174,6 +179,18 @@ class Cart implements TimestampableInterface
     public function getBillingName()
     {
         return $this->getBillingFirstName().' '.$this->getBillingLastName();
+    }
+
+    public function getTotal()
+    {
+        return $this->total;
+    }
+
+    public function setTotal($total)
+    {
+        $this->total = $total;
+
+        return $this;
     }
 
     public function getIp()
