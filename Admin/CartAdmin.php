@@ -13,8 +13,12 @@ class CartAdmin extends Admin
     {
         $builder
             ->add('id')
+            ->add('frozenAt', 'date', [
+                'format' => 'd/m/Y',
+            ])
             ->add('shippingName')
             ->add('billingName')
+            ->add('status')
             ->add('', 'action')
         ;
     }
@@ -22,12 +26,13 @@ class CartAdmin extends Admin
     public function buildForm(FormBuilder $builder)
     {
         $builder
-            ->add('id')
+            ->add('status')
         ;
     }
 
     public function buildListQuery(QueryBuilder $qb)
     {
         $qb->andWhere($qb->expr()->isNotNull('a.status'));
+        $qb->join('a.items', 'i');
     }
 }

@@ -156,6 +156,16 @@ class Cart implements TimestampableInterface
         $this->items = new ArrayCollection();
     }
 
+    public function isAddressed()
+    {
+        return $this->getShippingAddress() ? true : false;
+    }
+
+    public function isEmpty()
+    {
+        return $this->getItems()->count() ? false : true;
+    }
+
     public function getShippingName()
     {
         return $this->getShippingFirstName().' '.$this->getShippingLastName();

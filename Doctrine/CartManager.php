@@ -48,15 +48,10 @@ class CartManager extends BaseManager
     public function collectGarbage()
     {
         $qb = $this->getFindByQueryBuilder();
-
         $qb->andWhere($qb->expr()->isNull('a.frozenAt'));
-
         $carts = $qb->getQuery()->execute();
 
         foreach ($carts as $cart) {
-            // if ($cart->getTransactions()->count()) {
-            //     continue;
-            // }
             if ($cart->getUpdatedAt()->getTimestamp() > time() - 86400) {
                 continue;
             }

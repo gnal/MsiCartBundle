@@ -43,3 +43,7 @@ msi_store_checkout_summary:
 msi_store_checkout_process:
     pattern:  /checkout/process
     defaults: { _controller: MsiStoreBundle:Checkout:process }
+
+msi_store_checkout_thankyou:
+    pattern:  /checkout/thankyou
+    defaults: { _controller: MsiStoreBundle:Checkout:thankyou }

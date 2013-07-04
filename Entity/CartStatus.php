@@ -36,4 +36,9 @@ class CartStatus implements TimestampableInterface, TranslatableInterface
     {
         return $this->id;
     }
+
+    public function __toString()
+    {
+        return (string) $this->getTranslation()->getName();
+    }
 }
