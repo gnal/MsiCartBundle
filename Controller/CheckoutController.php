@@ -90,6 +90,9 @@ class CheckoutController extends Controller
             ->setFrozenAt(new \DateTime())
             ->setIp($this->getRequest()->getClientIp())
             ->setStatus($this->get('msi_store.cart_status_manager')->getOneBy(['a.id' => 1]))
+            ->setSubtotal($strat->cartSubtotal($this->getCart()))
+            ->setPstTotal($strat->pstTotal($this->getCart()))
+            ->setGstTotal($strat->gstTotal($this->getCart()))
             ->setTotal($strat->cartTotal($this->getCart()))
         ;
 

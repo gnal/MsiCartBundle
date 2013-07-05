@@ -34,6 +34,21 @@ class Cart implements TimestampableInterface
     /**
      * @ORM\Column(type="decimal", scale=2, nullable=true)
      */
+    protected $subtotal;
+
+    /**
+     * @ORM\Column(type="decimal", scale=2, nullable=true)
+     */
+    protected $gstTotal;
+
+    /**
+     * @ORM\Column(type="decimal", scale=2, nullable=true)
+     */
+    protected $pstTotal;
+
+    /**
+     * @ORM\Column(type="decimal", scale=2, nullable=true)
+     */
     protected $total;
 
     // shipping
@@ -213,6 +228,42 @@ class Cart implements TimestampableInterface
     public function setStatus($status)
     {
         $this->status = $status;
+
+        return $this;
+    }
+
+    public function getSubtotal()
+    {
+        return $this->subtotal;
+    }
+
+    public function setSubtotal($subtotal)
+    {
+        $this->subtotal = $subtotal;
+
+        return $this;
+    }
+
+    public function getGstTotal()
+    {
+        return $this->gstTotal;
+    }
+
+    public function setGstTotal($gstTotal)
+    {
+        $this->gstTotal = $gstTotal;
+
+        return $this;
+    }
+
+    public function getPstTotal()
+    {
+        return $this->pstTotal;
+    }
+
+    public function setPstTotal($pstTotal)
+    {
+        $this->pstTotal = $pstTotal;
 
         return $this;
     }
@@ -500,6 +551,6 @@ class Cart implements TimestampableInterface
 
     public function __toString()
     {
-        return (string) $this->id;
+        return (string) '#'.$this->id;
     }
 }

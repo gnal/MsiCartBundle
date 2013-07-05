@@ -4,10 +4,10 @@ namespace Msi\StoreBundle\Controller\Admin;
 
 use Msi\CmfBundle\Controller\CoreController;
 
-class ProductController extends CoreController
+class CartController extends CoreController
 {
     public function showAction()
     {
-        return $this->render('MsiStoreBundle:Product/Admin:show.html.twig');
+        return $this->render('MsiStoreBundle:Cart/Admin:show.html.twig');
     }
 }
