@@ -5,8 +5,6 @@ namespace Msi\StoreBundle\Model;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
 
-use Msi\AdminBundle\Tools\Cutter;
-
 /**
  * @ORM\MappedSuperclass
  */
@@ -14,7 +12,6 @@ abstract class Product
 {
     use \Msi\AdminBundle\Doctrine\Extension\Model\Translatable;
     use \Msi\AdminBundle\Doctrine\Extension\Model\Timestampable;
-    use \Msi\AdminBundle\Doctrine\Extension\Model\Uploadable;
     use \Msi\AdminBundle\Doctrine\Extension\Model\Publishable;
 
     /**
@@ -42,26 +39,16 @@ abstract class Product
      */
     protected $taxable;
 
-    /**
-     * @ORM\Column(type="string", nullable=true)
-     */
-    protected $image;
-
-    protected $imageFile;
-
     protected $category;
+
+    protected $images;
 
     public function __construct()
     {
         $this->published = false;
         $this->taxable = true;
         $this->translations = new ArrayCollection();
-    }
-
-    public function processImageFile($file)
-    {
-        $cutter = new Cutter($file);
-        $cutter->resize(300, 150)->save();
+        $this->images = new ArrayCollection();
     }
 
     public function getRightPrice()
@@ -157,41 +144,6 @@ abstract class Product
         return $this;
     }
 
-    public function getImage()
-    {
-        return $this->image;
-    }
-
-    public function setImage($image)
-    {
-        $this->image = $image;
-
-        return $this;
-    }
-
-    public function getImageFile()
-    {
-        return $this->imageFile;
-    }
-
-    public function setImageFile($imageFile)
-    {
-        $this->imageFile = $imageFile;
-        $this->updateAt = new \DateTime();
-
-        return $this;
-    }
-
-    public function getUploadDirSuffix()
-    {
-        return $this->getId();
-    }
-
-    public function getUploadFields()
-    {
-        return ['imagefile' => 'image'];
-    }
-
     public function getPrice()
     {
         return $this->price;
@@ -224,6 +176,18 @@ abstract class Product
     public function setTranslations($translations)
     {
         $this->translations = $translations;
+
+        return $this;
+    }
+
+    public function getImages()
+    {
+        return $this->images;
+    }
+
+    public function setImages($images)
+    {
+        $this->images = $images;
 
         return $this;
     }

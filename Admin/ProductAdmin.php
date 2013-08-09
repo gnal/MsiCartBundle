@@ -23,7 +23,6 @@ class ProductAdmin extends Admin
     {
         $builder
             ->add('published', 'boolean')
-            ->add('image', 'image')
             ->add('name')
             ->add('category')
             ->add('price')
@@ -62,7 +61,6 @@ class ProductAdmin extends Admin
                     'class' => 'datepicker',
                 ],
             ])
-            ->add('imageFile', 'file')
         ;
     }
 

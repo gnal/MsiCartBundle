@@ -7,7 +7,7 @@ use Doctrine\Common\EventArgs;
 use Doctrine\ORM\Events;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
-class ProductListener implements EventSubscriber
+class ProductImageListener implements EventSubscriber
 {
     protected $container;
 
@@ -27,28 +27,20 @@ class ProductListener implements EventSubscriber
     {
         $metadata = $e->getClassMetadata();
 
-        if ($metadata->name !== $this->container->getParameter('msi_store.product.class')) {
+        if ($metadata->name !== 'Msi\StoreBundle\Entity\ProductImage') {
             return;
         }
 
-        if (!$metadata->hasAssociation('category')) {
+        if (!$metadata->hasAssociation('product')) {
             $metadata->mapManyToOne([
-                'fieldName'    => 'category',
-                'targetEntity' => 'Msi\StoreBundle\Entity\ProductCategory',
-                'inversedBy' => 'products',
+                'fieldName'    => 'product',
+                'targetEntity' => $this->container->getParameter('msi_store.product.class'),
+                'inversedBy' => 'images',
                 'joinColumns' => [
                     [
                         'onDelete' => 'SET NULL',
                     ],
                 ],
-            ]);
-        }
-
-        if (!$metadata->hasAssociation('images')) {
-            $metadata->mapOneToMany([
-                'fieldName'    => 'images',
-                'targetEntity' => 'Msi\StoreBundle\Entity\ProductImage',
-                'mappedBy' => 'product',
             ]);
         }
     }

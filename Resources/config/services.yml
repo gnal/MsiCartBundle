@@ -34,6 +34,12 @@ services:
         tags:
             - { name: doctrine.event_subscriber }
 
+    msi_store.product_image_listener:
+        class: Msi\StoreBundle\EventListener\ProductImageListener
+        arguments: [ @service_container ]
+        tags:
+            - { name: doctrine.event_subscriber }
+
     msi_store.product_category_listener:
         class: Msi\StoreBundle\EventListener\ProductCategoryListener
         arguments: [ @service_container ]

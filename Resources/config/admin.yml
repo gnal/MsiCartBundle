@@ -35,10 +35,28 @@ services:
         parent: msi_admin.admin
         tags:
             - { name: msi.admin }
+        calls:
+            - [addChild, [@msi_store_product_image_admin]]
 
     msi_store.product_manager:
         class: %msi_admin.manager.class%
         arguments: [ %msi_store.product.class% ]
+        parent: msi_admin.manager
+
+
+    # ProductImage
+    msi_store_product_image_admin:
+        class: Msi\StoreBundle\Admin\ProductImageAdmin
+        arguments: [ @msi_store.product_image_manager ]
+        parent: msi_admin.admin
+        tags:
+            - { name: msi.admin }
+        calls:
+            - [setParent, [@msi_store_product_admin]]
+
+    msi_store.product_image_manager:
+        class: %msi_admin.manager.class%
+        arguments: [ Msi\StoreBundle\Entity\ProductImage ]
         parent: msi_admin.manager
 
     # ProductCategory
