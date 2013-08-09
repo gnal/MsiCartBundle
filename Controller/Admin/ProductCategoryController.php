@@ -2,7 +2,7 @@
 
 namespace Msi\StoreBundle\Controller\Admin;
 
-use Msi\CmfBundle\Controller\CoreController;
+use Msi\AdminBundle\Controller\CoreController;
 use Symfony\Component\HttpFoundation\Request;
 
 class ProductCategoryController extends CoreController

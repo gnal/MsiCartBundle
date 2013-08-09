@@ -1,24 +1,16 @@
 <?php
 
-namespace Msi\StoreBundle\Entity;
+namespace Msi\StoreBundle\Model;
 
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
- * @ORM\Table(uniqueConstraints={@ORM\UniqueConstraint(name="uniq_slug_locale", columns={"slug", "locale"}), @ORM\UniqueConstraint(name="uniq_object_id_locale", columns={"object_id", "locale"})})
- * @ORM\Entity
+ * @ORM\MappedSuperclass
  */
-class ProductTranslation
+abstract class ProductTranslation
 {
-    use \Msi\CmfBundle\Doctrine\Extension\Translatable\Traits\TranslationEntity;
-
-    /**
-     * @ORM\Column(type="integer")
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="AUTO")
-     */
-    protected $id;
+    use \Msi\AdminBundle\Doctrine\Extension\Model\Translation;
 
     /**
      * @ORM\Column(type="string")
@@ -30,12 +22,6 @@ class ProductTranslation
      * @ORM\Column()
      */
     protected $slug;
-
-    /**
-     * @ORM\ManyToOne(targetEntity="Product", inversedBy="translations")
-     * @ORM\JoinColumn(onDelete="CASCADE")
-     */
-    protected $object;
 
     public function getSlug()
     {

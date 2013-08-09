@@ -35,7 +35,7 @@ class LoginListener
                     $this->cartManager->delete($old);
                 }
                 $cart->setUser($this->user);
-                $this->cartManager->update($cart);
+                $this->cartManager->update($cart); // el bug doit etre icitte
             }
 
             $event->getResponse()->headers->clearCookie('msci');

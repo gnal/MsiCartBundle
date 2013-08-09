@@ -5,19 +5,17 @@ namespace Msi\StoreBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
 
-use Msi\CmfBundle\Doctrine\Extension\Timestampable\TimestampableInterface;
-use Msi\CmfBundle\Doctrine\Extension\Translatable\TranslatableInterface;
-
 use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
  * @Gedmo\Tree(type="nested")
  * @ORM\Entity(repositoryClass="Gedmo\Tree\Entity\Repository\NestedTreeRepository")
  */
-class ProductCategory implements TimestampableInterface, TranslatableInterface
+class ProductCategory
 {
-    use \Msi\CmfBundle\Doctrine\Extension\Translatable\Traits\TranslatableEntity;
-    use \Msi\CmfBundle\Doctrine\Extension\Timestampable\Traits\TimestampableEntity;
+    use \Msi\AdminBundle\Doctrine\Extension\Model\Translatable;
+    use \Msi\AdminBundle\Doctrine\Extension\Model\Timestampable;
+    use \Msi\AdminBundle\Doctrine\Extension\Model\Publishable;
 
     /**
      * @ORM\Column(type="integer")
@@ -51,11 +49,6 @@ class ProductCategory implements TimestampableInterface, TranslatableInterface
     protected $root;
 
     /**
-     * @ORM\Column(type="boolean")
-     */
-    protected $published;
-
-    /**
      * @Gedmo\TreeParent
      * @ORM\ManyToOne(targetEntity="ProductCategory", inversedBy="children")
      * @ORM\JoinColumn(onDelete="CASCADE")
@@ -68,16 +61,43 @@ class ProductCategory implements TimestampableInterface, TranslatableInterface
      */
     protected $children;
 
-    /**
-     * @ORM\OneToMany(targetEntity="ProductCategoryTranslation", mappedBy="object", cascade={"persist"})
-     */
-    protected $translations;
+    protected $products;
 
     public function __construct()
     {
         $this->published = false;
         $this->children = new ArrayCollection();
         $this->translations = new ArrayCollection();
+        $this->products = new ArrayCollection();
+    }
+
+    public function countProductsRecursively(&$total = 0, $entity = null)
+    {
+        $entity = $entity ?: $this;
+
+        foreach ($entity->getProducts() as $product) {
+            if ($product->getPublished()) {
+                $total++;
+            }
+        }
+
+        foreach ($entity->getChildren() as $child) {
+            $this->countProductsRecursively($total, $child);
+        }
+
+        return $total;
+    }
+
+    public function getProducts()
+    {
+        return $this->products;
+    }
+
+    public function setProducts($products)
+    {
+        $this->products = $products;
+
+        return $this;
     }
 
     public function getLvl()
@@ -124,18 +144,6 @@ class ProductCategory implements TimestampableInterface, TranslatableInterface
     public function setRoot($root)
     {
         $this->root = $root;
-
-        return $this;
-    }
-
-    public function getPublished()
-    {
-        return $this->published;
-    }
-
-    public function setPublished($published)
-    {
-        $this->published = $published;
 
         return $this;
     }

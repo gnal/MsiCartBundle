@@ -2,8 +2,8 @@
 
 namespace Msi\StoreBundle\Admin;
 
-use Msi\CmfBundle\Admin\Admin;
-use Msi\CmfBundle\Grid\GridBuilder;
+use Msi\AdminBundle\Admin\Admin;
+use Msi\AdminBundle\Grid\GridBuilder;
 use Symfony\Component\Form\FormBuilder;
 
 class ProductCategoryAdmin extends Admin
@@ -32,9 +32,20 @@ class ProductCategoryAdmin extends Admin
 
     public function buildForm(FormBuilder $builder)
     {
+        // $qb = $this->container->get('msi_store.product_category_manager')->getMasterQueryBuilder();
+
+        // $qb->andWhere($qb->expr()->neq('a.id', $this->getObject()->getId()));
+
+        // $parents = $qb->getQuery()->execute();
+
         $builder
             ->add('published')
-            ->add('parent')
+            ->add('parent', 'entity', [
+                'class' => 'MsiStoreBundle:ProductCategory',
+                // 'choices' => $parents,
+                'empty_value' => 'None',
+                'required' => false,
+            ])
         ;
     }
 
@@ -42,6 +53,7 @@ class ProductCategoryAdmin extends Admin
     {
         $builder
             ->add('name')
+            ->add('content')
         ;
     }
 }

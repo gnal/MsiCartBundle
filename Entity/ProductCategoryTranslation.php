@@ -11,7 +11,7 @@ use Gedmo\Mapping\Annotation as Gedmo;
  */
 class ProductCategoryTranslation
 {
-    use \Msi\CmfBundle\Doctrine\Extension\Translatable\Traits\TranslationEntity;
+    use \Msi\AdminBundle\Doctrine\Extension\Model\Translation;
 
     /**
      * @ORM\Column(type="integer")
@@ -32,10 +32,21 @@ class ProductCategoryTranslation
     protected $name;
 
     /**
-     * @ORM\ManyToOne(targetEntity="ProductCategory", inversedBy="translations")
-     * @ORM\JoinColumn(onDelete="CASCADE")
+     * @ORM\Column(type="text", nullable=true)
      */
-    protected $object;
+    protected $content;
+
+    public function getContent()
+    {
+        return $this->content;
+    }
+
+    public function setContent($content)
+    {
+        $this->content = $content;
+
+        return $this;
+    }
 
     public function getSlug()
     {

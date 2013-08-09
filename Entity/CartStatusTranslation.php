@@ -10,7 +10,7 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class CartStatusTranslation
 {
-    use \Msi\CmfBundle\Doctrine\Extension\Translatable\Traits\TranslationEntity;
+    use \Msi\AdminBundle\Doctrine\Extension\Model\Translation;
 
     /**
      * @ORM\Column(type="integer")
@@ -23,12 +23,6 @@ class CartStatusTranslation
      * @ORM\Column(type="string")
      */
     protected $name;
-
-    /**
-     * @ORM\ManyToOne(targetEntity="CartStatus", inversedBy="translations")
-     * @ORM\JoinColumn(onDelete="CASCADE")
-     */
-    protected $object;
 
     public function getName()
     {

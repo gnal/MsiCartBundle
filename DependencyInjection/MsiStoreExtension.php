@@ -25,5 +25,12 @@ class MsiStoreExtension extends Extension
         $loader = new Loader\YamlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
         $loader->load('services.yml');
         $loader->load('admin.yml');
+
+        $this->registerConfiguration($config, $container);
+    }
+
+    private function registerConfiguration($config, ContainerBuilder $container)
+    {
+        $container->setParameter('msi_store.product.class', $config['product_class']);
     }
 }

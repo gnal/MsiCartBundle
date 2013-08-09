@@ -1,30 +1,21 @@
 <?php
 
-namespace Msi\StoreBundle\Entity;
+namespace Msi\StoreBundle\Model;
 
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
 
-use Msi\CmfBundle\Doctrine\Extension\Timestampable\TimestampableInterface;
-use Msi\CmfBundle\Doctrine\Extension\Translatable\TranslatableInterface;
-use Msi\CmfBundle\Doctrine\Extension\Uploadable\UploadableInterface;
-use Msi\CmfBundle\Tools\Cutter;
+use Msi\AdminBundle\Tools\Cutter;
 
 /**
- * @ORM\Entity
+ * @ORM\MappedSuperclass
  */
-class Product implements TimestampableInterface, TranslatableInterface, UploadableInterface
+abstract class Product
 {
-    use \Msi\CmfBundle\Doctrine\Extension\Translatable\Traits\TranslatableEntity;
-    use \Msi\CmfBundle\Doctrine\Extension\Timestampable\Traits\TimestampableEntity;
-    use \Msi\CmfBundle\Doctrine\Extension\Uploadable\Traits\UploadableEntity;
-
-    /**
-     * @ORM\Column(type="integer")
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="AUTO")
-     */
-    protected $id;
+    use \Msi\AdminBundle\Doctrine\Extension\Model\Translatable;
+    use \Msi\AdminBundle\Doctrine\Extension\Model\Timestampable;
+    use \Msi\AdminBundle\Doctrine\Extension\Model\Uploadable;
+    use \Msi\AdminBundle\Doctrine\Extension\Model\Publishable;
 
     /**
      * @ORM\Column(type="decimal", scale=2)
@@ -49,23 +40,7 @@ class Product implements TimestampableInterface, TranslatableInterface, Uploadab
     /**
      * @ORM\Column(type="boolean")
      */
-    protected $published;
-
-    /**
-     * @ORM\Column(type="boolean")
-     */
     protected $taxable;
-
-    /**
-     * @ORM\ManyToOne(targetEntity="ProductCategory")
-     * @ORM\JoinColumn(onDelete="SET NULL")
-     */
-    protected $category;
-
-    /**
-     * @ORM\OneToMany(targetEntity="ProductTranslation", mappedBy="object", cascade={"persist"})
-     */
-    protected $translations;
 
     /**
      * @ORM\Column(type="string", nullable=true)
@@ -74,11 +49,19 @@ class Product implements TimestampableInterface, TranslatableInterface, Uploadab
 
     protected $imageFile;
 
+    protected $category;
+
     public function __construct()
     {
         $this->published = false;
         $this->taxable = true;
         $this->translations = new ArrayCollection();
+    }
+
+    public function processImageFile($file)
+    {
+        $cutter = new Cutter($file);
+        $cutter->resize(300, 150)->save();
     }
 
     public function getRightPrice()
@@ -199,9 +182,14 @@ class Product implements TimestampableInterface, TranslatableInterface, Uploadab
         return $this;
     }
 
+    public function getUploadDirSuffix()
+    {
+        return $this->getId();
+    }
+
     public function getUploadFields()
     {
-        return ['image'];
+        return ['imagefile' => 'image'];
     }
 
     public function getPrice()
@@ -212,18 +200,6 @@ class Product implements TimestampableInterface, TranslatableInterface, Uploadab
     public function setPrice($price)
     {
         $this->price = $price;
-
-        return $this;
-    }
-
-    public function getPublished()
-    {
-        return $this->published;
-    }
-
-    public function setPublished($published)
-    {
-        $this->published = $published;
 
         return $this;
     }

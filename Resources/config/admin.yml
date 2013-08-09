@@ -6,76 +6,76 @@ services:
     msi_store_cart_admin:
         class: Msi\StoreBundle\Admin\CartAdmin
         arguments: [ @msi_store.cart_manager ]
-        parent: msi_cmf.admin
+        parent: msi_admin.admin
         tags:
             - { name: msi.admin }
 
     msi_store.cart_manager:
         class: Msi\StoreBundle\Doctrine\CartManager
         arguments: [ Msi\StoreBundle\Entity\Cart ]
-        parent: msi_cmf.manager
+        parent: msi_admin.manager
 
     # CartItem
     msi_store_cart_item_admin:
         class: Msi\StoreBundle\Admin\CartItemAdmin
         arguments: [ @msi_store.cart_item_manager ]
-        parent: msi_cmf.admin
+        parent: msi_admin.admin
         tags:
             - { name: msi.admin }
 
     msi_store.cart_item_manager:
-        class: %msi_cmf.manager.class%
+        class: %msi_admin.manager.class%
         arguments: [ Msi\StoreBundle\Entity\CartItem ]
-        parent: msi_cmf.manager
+        parent: msi_admin.manager
 
     # Product
     msi_store_product_admin:
         class: Msi\StoreBundle\Admin\ProductAdmin
         arguments: [ @msi_store.product_manager ]
-        parent: msi_cmf.admin
+        parent: msi_admin.admin
         tags:
             - { name: msi.admin }
 
     msi_store.product_manager:
-        class: %msi_cmf.manager.class%
-        arguments: [ Msi\StoreBundle\Entity\Product ]
-        parent: msi_cmf.manager
+        class: %msi_admin.manager.class%
+        arguments: [ %msi_store.product.class% ]
+        parent: msi_admin.manager
 
     # ProductCategory
     msi_store_product_category_admin:
         class: Msi\StoreBundle\Admin\ProductCategoryAdmin
         arguments: [ @msi_store.product_category_manager ]
-        parent: msi_cmf.admin
+        parent: msi_admin.admin
         tags:
             - { name: msi.admin }
 
     msi_store.product_category_manager:
-        class: %msi_cmf.manager.class%
+        class: %msi_admin.manager.class%
         arguments: [ Msi\StoreBundle\Entity\ProductCategory ]
-        parent: msi_cmf.manager
+        parent: msi_admin.manager
 
     # Address
     msi_store_address_admin:
         class: Msi\StoreBundle\Admin\AddressAdmin
         arguments: [ @msi_store.address_manager ]
-        parent: msi_cmf.admin
+        parent: msi_admin.admin
         tags:
             - { name: msi.admin }
 
     msi_store.address_manager:
-        class: %msi_cmf.manager.class%
+        class: %msi_admin.manager.class%
         arguments: [ Msi\StoreBundle\Entity\Address ]
-        parent: msi_cmf.manager
+        parent: msi_admin.manager
 
     # CartStatus
     msi_store_cart_status_admin:
         class: Msi\StoreBundle\Admin\CartStatusAdmin
         arguments: [ @msi_store.cart_status_manager ]
-        parent: msi_cmf.admin
+        parent: msi_admin.admin
         tags:
             - { name: msi.admin }
 
     msi_store.cart_status_manager:
-        class: %msi_cmf.manager.class%
+        class: %msi_admin.manager.class%
         arguments: [ Msi\StoreBundle\Entity\CartStatus ]
-        parent: msi_cmf.manager
+        parent: msi_admin.manager

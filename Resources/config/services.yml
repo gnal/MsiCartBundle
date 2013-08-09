@@ -27,3 +27,33 @@ services:
         tags:
             - { name: twig.extension }
         public: false
+
+    msi_store.product_listener:
+        class: Msi\StoreBundle\EventListener\ProductListener
+        arguments: [ @service_container ]
+        tags:
+            - { name: doctrine.event_subscriber }
+
+    msi_store.product_category_listener:
+        class: Msi\StoreBundle\EventListener\ProductCategoryListener
+        arguments: [ @service_container ]
+        tags:
+            - { name: doctrine.event_subscriber }
+
+    msi_store.address_listener:
+        class: Msi\StoreBundle\EventListener\AddressListener
+        arguments: [ @service_container ]
+        tags:
+            - { name: doctrine.event_subscriber }
+
+    msi_store.cart_listener:
+        class: Msi\StoreBundle\EventListener\CartListener
+        arguments: [ @service_container ]
+        tags:
+            - { name: doctrine.event_subscriber }
+
+    msi_store.cart_item_listener:
+        class: Msi\StoreBundle\EventListener\CartItemListener
+        arguments: [ @service_container ]
+        tags:
+            - { name: doctrine.event_subscriber }

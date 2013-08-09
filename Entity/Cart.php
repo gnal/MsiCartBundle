@@ -5,14 +5,12 @@ namespace Msi\StoreBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
 
-use Msi\CmfBundle\Doctrine\Extension\Timestampable\TimestampableInterface;
-
 /**
  * @ORM\Entity
  */
-class Cart implements TimestampableInterface
+class Cart
 {
-    use \Msi\CmfBundle\Doctrine\Extension\Timestampable\Traits\TimestampableEntity;
+    use \Msi\AdminBundle\Doctrine\Extension\Model\Timestampable;
 
     /**
      * @ORM\Column(type="integer")
@@ -160,10 +158,6 @@ class Cart implements TimestampableInterface
      */
     protected $items;
 
-    /**
-     * @ORM\ManyToOne(targetEntity="Acme\UserBundle\Entity\User")
-     * @ORM\JoinColumn(onDelete="SET NULL")
-     */
     protected $user;
 
     /**

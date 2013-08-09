@@ -37,11 +37,6 @@ class CartItem
      */
     protected $total;
 
-
-    /**
-     * @ORM\ManyToOne(targetEntity="Product")
-     * @ORM\JoinColumn(onDelete="SET NULL")
-     */
     protected $product;
 
     /**

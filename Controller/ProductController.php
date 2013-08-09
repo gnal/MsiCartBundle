@@ -8,18 +8,37 @@ class ProductController extends Controller
 {
     public function listAction()
     {
+        $parameters['category'] = $this->get('msi_store.product_category_manager')->find(
+            [
+                'a.id' => $this->getRequest()->query->get('category'),
+            ],
+            [],
+            [],
+            $this->getRequest()->query->get('category') ? true : false
+        );
+
         $qb = $this->get('msi_store.product_manager')->getFindByQueryBuilder(
             [
                 'a.published' => true,
-                't.locale' => $this->getRequest()->getLocale(),
+                'translations.locale' => $this->getRequest()->getLocale(),
             ],
             [
-                'a.translations' => 't',
+                'a.translations' => 'translations',
+                'a.category' => 'category',
+            ],
+            [
+                'translations.name' => 'ASC',
             ]
         );
 
-        $products = $qb->getQuery()->execute();
+        if ($parameters['category']) {
+            $qb->andWhere($qb->expr()->gte('category.lft', ':lft'))->setParameter('lft', $parameters['category']->getLft());
+            $qb->andWhere($qb->expr()->lte('category.rgt', ':rgt'))->setParameter('rgt', $parameters['category']->getRgt());
+            $qb->andWhere($qb->expr()->eq('category.root', ':root'))->setParameter('root', $parameters['category']->getRoot());
+        }
 
-        return $this->render('MsiStoreBundle:Product:list.html.twig', ['products' => $products]);
+        $parameters['products'] = $qb->getQuery()->execute();
+
+        return $this->render('MsiStoreBundle:Product:list.html.twig', $parameters);
     }
 }

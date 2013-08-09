@@ -2,7 +2,7 @@
 
 namespace Msi\StoreBundle\Doctrine;
 
-use Msi\CmfBundle\Doctrine\Manager as BaseManager;
+use Msi\AdminBundle\Doctrine\Manager as BaseManager;
 
 class CartManager extends BaseManager
 {

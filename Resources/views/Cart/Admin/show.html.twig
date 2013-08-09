@@ -1,4 +1,4 @@
-{% extends 'MsiCmfBundle::base_layout.html.twig' %}
+{% extends 'MsiAdminBundle::base_layout.html.twig' %}
 
 {% block title %}
 {{ admin.label }} {{ admin.object }}
@@ -97,7 +97,7 @@
                     <p><strong>Total</strong></p>
                     <br>
                     <p><strong>Total Paid</strong></p>
-                    <p><strong>Total Due</strong></p>
+                    <p style="margin-bottom: 0;"><strong>Total Due</strong></p>
                 </div>
                 <div class="span6 text-right">
                     <p>{{ admin.object.subtotal }} $</p>
@@ -106,7 +106,7 @@
                     <p><strong>{{ admin.object.total }} $</strong></p>
                     <br>
                     <p><strong>0.00 $</strong></p>
-                    <p><strong>{{ admin.object.total }} $</strong></p>
+                    <p style="margin-bottom: 0;"><strong>{{ admin.object.total }} $</strong></p>
                 </div>
             </div>
         </div>

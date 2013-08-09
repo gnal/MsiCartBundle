@@ -2,8 +2,8 @@
 
 namespace Msi\StoreBundle\Admin;
 
-use Msi\CmfBundle\Admin\Admin;
-use Msi\CmfBundle\Grid\GridBuilder;
+use Msi\AdminBundle\Admin\Admin;
+use Msi\AdminBundle\Grid\GridBuilder;
 use Symfony\Component\Form\FormBuilder;
 
 class CartItemAdmin extends Admin

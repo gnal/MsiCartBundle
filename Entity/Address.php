@@ -3,7 +3,6 @@
 namespace Msi\StoreBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * @ORM\Entity
@@ -72,10 +71,6 @@ class Address
      */
     protected $isDefault;
 
-    /**
-     * @ORM\ManyToOne(targetEntity="Acme\UserBundle\Entity\User", inversedBy="addresses")
-     * @ORM\JoinColumn(onDelete="CASCADE")
-     */
     protected $user;
 
     public function __construct()
