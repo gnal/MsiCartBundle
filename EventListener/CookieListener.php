@@ -7,15 +7,15 @@ use Symfony\Component\HttpFoundation\Cookie;
 
 class CookieListener
 {
-    protected $cartProvider;
+    protected $cart;
 
-    public function __construct($cartProvider)
+    public function __construct($cart)
     {
-        $this->cartProvider = $cartProvider;
+        $this->cart = $cart;
     }
 
     public function onKernelResponse(FilterResponseEvent $event)
     {
-        $event->getResponse()->headers->setCookie(new Cookie('msci', $this->cartProvider->getCart()->getId()));
+        $event->getResponse()->headers->setCookie(new Cookie('msci', $this->cart->getId()));
     }
 }

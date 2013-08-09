@@ -3,7 +3,6 @@
 namespace Msi\StoreBundle\Cart;
 
 use Symfony\Component\DependencyInjection\ContainerInterface;
-use Symfony\Component\HttpKernel\KernelEvents;
 
 class CartProvider
 {
@@ -19,7 +18,6 @@ class CartProvider
     {
         if (!$this->cart) {
             $cartManager = $this->container->get('msi_store.cart_manager');
-
             if ($this->getUser()) {
                 $this->cart = $cartManager->findCartByUser($this->getUser());
             } else {
@@ -28,13 +26,6 @@ class CartProvider
 
             if (!$this->cart) {
                 $this->cart = $cartManager->create();
-                if ($this->getUser()) {
-                    $this->cart->setUser($this->getUser());
-                    $cartManager->update($this->cart);
-                } else {
-                    $cartManager->update($this->cart);
-                    $this->container->get('event_dispatcher')->addListener(KernelEvents::RESPONSE, [$this->container->get('msi_store.cookie_listener'), 'onKernelResponse']);
-                }
             }
         }
 

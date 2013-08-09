@@ -27,7 +27,6 @@ class LoginListener
         $request = $event->getRequest();
         if ($request->cookies->has('msci')) {
             $cart = $this->cartManager->findCartByCookie($request->cookies->get('msci'));
-
             if ($cart) {
                 // if the user already had a cart but made a new one while not logged, we delete his old one
                 $old = $this->cartManager->findCartByUser($this->user);
@@ -35,11 +34,10 @@ class LoginListener
                     $this->cartManager->delete($old);
                 }
                 $cart->setUser($this->user);
-                $this->cartManager->update($cart); // el bug doit etre icitte
+                $this->cartManager->update($cart);
             }
-
             $event->getResponse()->headers->clearCookie('msci');
         }
-        $this->cartManager->collectGarbage();
+        // $this->cartManager->collectGarbage();
     }
 }

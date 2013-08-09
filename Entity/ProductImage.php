@@ -12,6 +12,7 @@ class ProductImage
 {
     use \Msi\AdminBundle\Doctrine\Extension\Model\Timestampable;
     use \Msi\AdminBundle\Doctrine\Extension\Model\Uploadable;
+    use \Msi\AdminBundle\Doctrine\Extension\Model\Sortable;
 
     /**
      * @ORM\Column(type="integer")

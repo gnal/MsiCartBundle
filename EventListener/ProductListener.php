@@ -49,6 +49,7 @@ class ProductListener implements EventSubscriber
                 'fieldName'    => 'images',
                 'targetEntity' => 'Msi\StoreBundle\Entity\ProductImage',
                 'mappedBy' => 'product',
+                'orderBy' => ['position' => 'ASC'],
             ]);
         }
     }

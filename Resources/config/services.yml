@@ -10,10 +10,10 @@ services:
     msi_store.addition_strategy:
         class: Msi\StoreBundle\Cart\DefaultAdditionStrategy
 
-    msi_store.cookie_listener:
-        class: Msi\StoreBundle\EventListener\CookieListener
-        arguments: [ @msi_store.cart_provider ]
-        scope: request
+    # msi_store.cookie_listener:
+    #     class: Msi\StoreBundle\EventListener\CookieListener
+    #     arguments: [ @msi_store.cart_provider ]
+    #     scope: request
 
     msi_store.login_listener:
         class: Msi\StoreBundle\EventListener\LoginListener

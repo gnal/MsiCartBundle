@@ -154,7 +154,7 @@ class Cart
     protected $billingZip;
 
     /**
-     * @ORM\OneToMany(targetEntity="CartItem", mappedBy="cart", cascade={"persist"})
+     * @ORM\OneToMany(targetEntity="CartItem", mappedBy="cart", cascade={"persist", "remove"})
      */
     protected $items;
 
@@ -173,11 +173,6 @@ class Cart
     public function isAddressed()
     {
         return $this->getShippingAddress() ? true : false;
-    }
-
-    public function isEmpty()
-    {
-        return $this->getItems()->count() ? false : true;
     }
 
     public function getShippingName()
