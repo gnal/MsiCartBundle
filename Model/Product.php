@@ -12,7 +12,6 @@ abstract class Product
 {
     use \Msi\AdminBundle\Doctrine\Extension\Model\Translatable;
     use \Msi\AdminBundle\Doctrine\Extension\Model\Timestampable;
-    use \Msi\AdminBundle\Doctrine\Extension\Model\Publishable;
 
     /**
      * @ORM\Column(type="decimal", scale=2)

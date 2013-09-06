@@ -11,6 +11,7 @@ use Gedmo\Mapping\Annotation as Gedmo;
 abstract class ProductTranslation
 {
     use \Msi\AdminBundle\Doctrine\Extension\Model\Translation;
+    use \Msi\AdminBundle\Doctrine\Extension\Model\Publishable;
 
     /**
      * @ORM\Column(type="string")

@@ -1,0 +1,49 @@
+{% if products|length %}
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h4 class="panel-title">Featured Products</h4>
+    </div>
+    <div class="panel-body">
+        <div id="featuredProductCarousel">
+            <div class="row">
+                <div class="col-md-1">
+                    <a class="btn btn-block btn-default control control-prev" href="#"><i class="icon-chevron-left icon-large"></i></a>
+                </div>
+                <div class="col-md-10">
+                    <div class="carousel-wrap">
+                        <ul class="carousel">
+                        {% for product in products %}
+                            {% if loop.index == 1 or loop.index % 4 == 1 %}<li>{% endif %}
+                            {% if loop.index == 1 or loop.index % 4 == 1 %}<div class="row">{% endif %}
+                            <div class="col-md-3">
+                                <a class="coolboxbro" href="{{ path('msi_store_product_show', {'id': product.id}) }}">
+                                    <div class="coolboxbro-header">
+                                        <img src="/uploads/images/test.jpg" alt="0">
+                                    </div>
+                                    <div class="coolboxbro-body">
+                                        <p>
+                                            <strong>{{ product|truncate(15) }}</strong>
+                                            <br>
+                                            {% if product.discount %}
+                                                From: <span style="text-decoration: line-through;">${{ product.price|number_format(2) }}</span> <span class="text-danger">${{ product.discount|number_format(2) }}</span>
+                                            {% else %}
+                                                From: ${{ product.price|number_format(2) }}
+                                            {% endif %}
+                                        </p>
+                                    </div>
+                                </a>
+                            </div>
+                            {% if loop.index == products|length or loop.index % 4 == 0 %}</div>{% endif %}
+                            {% if loop.index == products|length or loop.index % 4 == 0 %}</li>{% endif %}
+                        {% endfor %}
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-md-1">
+                    <a class="btn btn-block btn-default control control-next" data-direction=next href="#"><i class="icon-chevron-right icon-large"></i></a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endif %}

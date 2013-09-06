@@ -19,7 +19,7 @@ class ProductController extends Controller
 
         $qb = $this->get('msi_store.product_manager')->getFindByQueryBuilder(
             [
-                'a.published' => true,
+                'translations.published' => true,
                 'translations.locale' => $this->getRequest()->getLocale(),
             ],
             [
@@ -40,5 +40,29 @@ class ProductController extends Controller
         $parameters['products'] = $qb->getQuery()->execute();
 
         return $this->render('MsiStoreBundle:Product:list.html.twig', $parameters);
+    }
+
+    public function showAction()
+    {
+        $parameters['product'] = $this->get('msi_store.product_manager')->find(
+            [
+                'a.id' => $this->getRequest()->attributes->get('id'),
+                'translations.published' => true,
+            ],
+            [
+                'a.translations' => 'translations',
+            ]
+        );
+
+        return $this->render('MsiStoreBundle:Product:show.html.twig', $parameters);
+    }
+
+    public function featuredAction()
+    {
+        $qb = $this->get('msi_store.product_manager')->getMasterQueryBuilder();
+
+        $parameters['products'] = $qb->getQuery()->execute();
+
+        return $this->render('MsiStoreBundle:Product:featured.html.twig', $parameters);
     }
 }
