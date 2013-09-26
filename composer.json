@@ -1,5 +1,5 @@
 {
-    "name": "msi/cart-bundle",
+    "name": "msi/store-bundle",
     "type": "symfony-bundle",
     "license": "MIT",
     "authors": [
@@ -9,7 +9,7 @@
         }
     ],
     "autoload": {
-        "psr-0": { "Msi\\CartBundle": "" }
+        "psr-0": { "Msi\\StoreBundle": "" }
     },
-    "target-dir": "Msi/CartBundle"
+    "target-dir": "Msi/StoreBundle"
 }
