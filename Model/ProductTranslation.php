@@ -24,6 +24,23 @@ abstract class ProductTranslation
      */
     protected $slug;
 
+    /**
+     * @ORM\Column(type="text", nullable=true)
+     */
+    protected $content;
+
+    public function getContent()
+    {
+        return $this->content;
+    }
+
+    public function setContent($content)
+    {
+        $this->content = $content;
+
+        return $this;
+    }
+
     public function getSlug()
     {
         return $this->slug;

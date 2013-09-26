@@ -12,9 +12,9 @@ class ProductAdmin extends Admin
     public function configure()
     {
         $this->options = [
-            'search_fields' => ['t.name'],
+            'search_fields' => ['translations.name'],
             'order_by' => [
-                't.name' => 'ASC',
+                'translations.name' => 'ASC',
             ],
         ];
     }
@@ -22,12 +22,10 @@ class ProductAdmin extends Admin
     public function buildGrid(GridBuilder $builder)
     {
         $builder
+            ->add('published', 'boolean')
             ->add('name')
             ->add('category')
             ->add('price')
-            ->add('discount', 'text', [
-                'truncate' => false,
-            ])
             ->add('', 'action')
         ;
     }
@@ -67,6 +65,11 @@ class ProductAdmin extends Admin
         $builder
             ->add('published', 'checkbox')
             ->add('name')
+            ->add('content', 'textarea', [
+                'attr' => [
+                    'class' => 'tinymce',
+                ],
+            ])
         ;
     }
 
