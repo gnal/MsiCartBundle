@@ -6,7 +6,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 class ProductController extends Controller
 {
-    public function listAction()
+    public function indexAction()
     {
         $parameters['category'] = $this->get('msi_store.product_category_manager')->find(
             [
@@ -39,7 +39,7 @@ class ProductController extends Controller
 
         $parameters['products'] = $qb->getQuery()->execute();
 
-        return $this->render('MsiStoreBundle:Product:list.html.twig', $parameters);
+        return $this->render('MsiStoreBundle:Product:index.html.twig', $parameters);
     }
 
     public function showAction()

@@ -1,3 +1,15 @@
+# Product Category
+
+msi_store_productcategory_show:
+    pattern:  /category/{id}
+    defaults: { _controller: MsiStoreBundle:ProductCategory:show }
+    requirements:
+        id: \d+
+
+msi_store_productcategory_nav:
+    pattern:  /category/nav
+    defaults: { _controller: MsiStoreBundle:ProductCategory:nav }
+
 # Search
 
 msi_store_search_index:
@@ -6,13 +18,15 @@ msi_store_search_index:
 
 # Product
 
-msi_store_product_list:
-    pattern:  /products
-    defaults: { _controller: MsiStoreBundle:Product:list }
+msi_store_product_index:
+    pattern:  /product
+    defaults: { _controller: MsiStoreBundle:Product:index }
 
 msi_store_product_show:
     pattern:  /products/{id}
     defaults: { _controller: MsiStoreBundle:Product:show }
+    requirements:
+        id: \d+
 
 # Cart Item
 
@@ -27,10 +41,14 @@ msi_store_cart_item_new:
 msi_store_cart_item_edit:
     pattern:  /cart/{id}/edit
     defaults: { _controller: MsiStoreBundle:CartItem:edit }
+    requirements:
+        id: \d+
 
 msi_store_cart_item_delete:
     pattern:  /cart/{id}/delete
     defaults: { _controller: MsiStoreBundle:CartItem:delete }
+    requirements:
+        id: \d+
 
 # Cart
 

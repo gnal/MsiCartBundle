@@ -1,4 +1,0 @@
-<h2>Product List</h2>
-{% for product in products %}
-    <p>{{ product.translations.0.name }} <a class="btn" href="{{ path('msi_store_cart_item_new', {'product': product.id}) }}">add to cart</a></p>
-{% endfor %}

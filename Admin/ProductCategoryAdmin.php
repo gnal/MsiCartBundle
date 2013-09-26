@@ -53,7 +53,7 @@ class ProductCategoryAdmin extends Admin
     {
         $builder
             ->add('name')
-            ->add('content')
+            ->add('content', 'textarea')
         ;
     }
 }

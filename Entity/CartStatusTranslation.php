@@ -5,7 +5,6 @@ namespace Msi\StoreBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Table(uniqueConstraints={@ORM\UniqueConstraint(name="uniq_object_id_locale", columns={"object_id", "locale"})})
  * @ORM\Entity
  */
 class CartStatusTranslation
