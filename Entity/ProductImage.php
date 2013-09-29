@@ -30,10 +30,12 @@ class ProductImage
 
     protected $product;
 
-    public function processImageFile($file)
+    public function processFilename($file)
     {
         $cutter = new Cutter($file);
-        $cutter->resize(300, 150)->save();
+        $cutter->resizeProp(600)->save('0');
+        $cutter->resizeProp(300)->save('1');
+        $cutter->resize(64, 64)->save('2');
     }
 
     public function getFilename()
@@ -86,5 +88,10 @@ class ProductImage
     public function getId()
     {
         return $this->id;
+    }
+
+    public function __toString()
+    {
+        return (string) $this->id;
     }
 }
