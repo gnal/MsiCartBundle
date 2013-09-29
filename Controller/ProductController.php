@@ -46,7 +46,7 @@ class ProductController extends Controller
     {
         $parameters['product'] = $this->get('msi_store.product_manager')->find(
             [
-                'a.id' => $this->getRequest()->attributes->get('id'),
+                'a.id' => $this->getRequest()->attributes->get('product'),
                 'translations.published' => true,
             ],
             [

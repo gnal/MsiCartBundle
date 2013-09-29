@@ -23,10 +23,10 @@ msi_store_product_index:
     defaults: { _controller: MsiStoreBundle:Product:index }
 
 msi_store_product_show:
-    pattern:  /products/{id}
+    pattern:  /product/{product}
     defaults: { _controller: MsiStoreBundle:Product:show }
     requirements:
-        id: \d+
+        product: \d+
 
 # Cart Item
 
