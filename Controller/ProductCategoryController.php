@@ -21,7 +21,7 @@ class ProductCategoryController extends Controller
     {
         $parameters['category'] = $this->get('msi_store.product_category_manager')->find(
             [
-                'a.id' => $this->getRequest()->query->get('category'),
+                'a.lvl' => 0,
             ]
         );
 
