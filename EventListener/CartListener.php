@@ -35,7 +35,7 @@ class CartListener implements EventSubscriber
             $metadata->mapManyToOne([
                 'fieldName'    => 'user',
                 'targetEntity' => $this->container->getParameter('fos_user.model.user.class'),
-                'inversedBy' => 'carts',
+                // 'inversedBy' => 'carts',
                 'joinColumns' => [
                     [
                         'onDelete' => 'SET NULL',

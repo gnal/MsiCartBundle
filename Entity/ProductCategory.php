@@ -76,7 +76,7 @@ class ProductCategory
         $entity = $entity ?: $this;
 
         foreach ($entity->getProducts() as $product) {
-            if ($product->getPublished()) {
+            if ($product->getTranslation()->getPublished()) {
                 $total++;
             }
         }
