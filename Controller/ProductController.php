@@ -25,10 +25,12 @@ class ProductController extends Controller
             [
                 'a.translations' => 'translations',
                 'a.category' => 'category',
+                'a.images' => 'images',
             ],
             [
                 'translations.name' => 'ASC',
-            ]
+            ],
+            100
         );
 
         if ($parameters['category']) {

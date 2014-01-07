@@ -10,12 +10,6 @@ msi_store_productcategory_nav:
     pattern:  /category/nav
     defaults: { _controller: MsiStoreBundle:ProductCategory:nav }
 
-# Search
-
-msi_store_search_index:
-    pattern:  /search
-    defaults: { _controller: MsiStoreBundle:Search:index }
-
 # Product
 
 msi_store_product_index:

@@ -44,7 +44,6 @@ abstract class Product
 
     public function __construct()
     {
-        $this->published = false;
         $this->taxable = true;
         $this->translations = new ArrayCollection();
         $this->images = new ArrayCollection();

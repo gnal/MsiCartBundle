@@ -33,9 +33,9 @@ class ProductImage
     public function processFilename($file)
     {
         $cutter = new Cutter($file);
-        $cutter->resizeProp(600)->save('0');
-        $cutter->resizeProp(300)->save('1');
-        $cutter->resize(64, 64)->save('2');
+        $cutter->resizeProp(600)->save('600');
+        $cutter->resizeProp(300)->save('300');
+        $cutter->resize(64, 64)->save('64x64');
     }
 
     public function getFilename()
@@ -75,10 +75,10 @@ class ProductImage
         return $this;
     }
 
-    public function getUploadDirSuffix()
-    {
-        return $this->getProduct()->getId();
-    }
+    // public function getUploadDirSuffix()
+    // {
+    //     return $this->getProduct()->getId();
+    // }
 
     public function getUploadFields()
     {
